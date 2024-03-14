@@ -1,5 +1,3 @@
-[INCLUDES]
-before = paths-debian.conf
 [DEFAULT]
 action = %(action_)s
 bantime.increment = true
@@ -12,22 +10,17 @@ ignoreip = 127.0.0.1/8
 bantime  = 1h
 findtime  = 10m
 maxretry = 3
-maxmatches = %(maxretry)s
-backend = auto
-usedns = warn
-logencoding = auto
-enabled = false
-mode = normal
-filter = %(__name__)s[mode=%(mode)s]
-protocol = tcp
-chain = <known/chain>
-port = 0:65535
-fail2ban_agent = Fail2Ban/%(fail2ban_version)s
 banaction = nftables[type=multiport]
-banaction_allports = nftables[type=allport]
+banaction_allports = nftables[type=allports]
 action_ = %(banaction)s[port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
 [sshd]
 enabled = true
 port    = 2222
 logpath = %(sshd_log)s
 backend = %(sshd_backend)s
+[recidive]
+enabled = true
+logpath = /var/log/fail2ban.log
+banaction = %(banaction_allports)s
+bantime = 1w
+findtime = 1d
