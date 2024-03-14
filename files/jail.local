@@ -9,8 +9,8 @@ bantime.formula = ban.Time * (1<<(ban.Count if ban.Count<20 else 20)) * banFacto
 bantime.multipliers = 1 5 30 60 300 720 1440 2880
 ignoreself = true
 ignoreip = 127.0.0.1/8
-bantime  = 10m
-findtime  = 5m
+bantime  = 1h
+findtime  = 10m
 maxretry = 3
 maxmatches = %(maxretry)s
 backend = auto
@@ -28,13 +28,6 @@ banaction_allports = nftables[type=allport]
 action_ = %(banaction)s[port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
 [sshd]
 enabled = true
-mode = ddos
 port    = 2222
 logpath = %(sshd_log)s
 backend = %(sshd_backend)s
-[recidive]
-enabled = true
-logpath = /var/log/fail2ban.log
-banaction = %(banaction_allports)s
-bantime = 1w
-findtime = 1d
