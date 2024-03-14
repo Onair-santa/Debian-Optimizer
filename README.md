@@ -2,7 +2,7 @@
 
 ## <a href="#"><img src="https://github.com/vpnhood/VpnHood/wiki/images/logo-linux.png" width="32" height="32"></a> Bash script automates the optimization of Debian(Ubuntu) server.
 
-![Xshell_oIQGBoGYxq](https://github.com/Onair-santa/Debian-Optimizer/assets/42511409/1d7a774f-cb97-4e33-a1f1-d6061e66dff7)
+![Xshell_y2vBlAwG56](https://github.com/Onair-santa/Debian-Optimizer/assets/42511409/c2672397-6de5-4878-ba54-9f3a2d0f0bc1)
 
 #### Before running the script, create a key pair and place the public key in the file /.ssh/authorized_keys .
 
