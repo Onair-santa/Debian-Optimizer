@@ -107,12 +107,11 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 ### 💠 Install Fail2ban security
 
 - More Details: https://github.com/fail2ban/fail2ban
-- Jail enabled: sshd(port=2222), recidive (settings in file jail.local)
+- Jail enabled: sshd(port=2222) (settings in file jail.local)
 - Status command:
   
   ```
   fail2ban-client status
-  fail2ban-client status recidive
   fail2ban-client status sshd
   ```
 
