@@ -646,10 +646,10 @@ nft_optimizations() {
     echo 
     sleep 0.5
 
-    # Purge firewalld to install UFW.
+    # Purge firewalld to install NFT.
     sudo apt -y purge firewalld
 
-    # Install UFW if it isn't installed.
+    # Install NFT if it isn't installed.
     sudo apt update -q
     sudo apt install -y nftables
 
@@ -729,26 +729,26 @@ show_menu() {
     echo 
     yellow_msg 'Choose One Option: '
     echo 
-    green_msg '1.  - Complete Update + Packages + SWAP + Optimize Net, SSH & Sys Limits + NFT'
+    green_msg '1.  - Complete Update + Packages + SWAP + Optimize Net, SSH & Sys Limits + NFT + Fail2ban'
     green_msg '2.  - Complete Update + SWAP + Optimize Net, SSH & Sys Limits + NFT'
     green_msg '3.  - Complete Update + SWAP + Optimize Net, SSH & Sys Limits'
     echo 
-    cyn_msg '4.  - Complete Update & Clean the OS.'
-    cyn_msg '5.  - Install Packages(htop, curl, nftables, speedtest).'
-    cyn_msg '6.  - Make SWAP (1Gb).'
-    cyn_msg '7.  - Optimize the Network, SSH & System Limits.'
+    cyn_msg '4.  - Complete Update & Clean the OS'
+    cyn_msg '5.  - Install Packages(htop, curl, nftables, speedtest)'
+    cyn_msg '6.  - Make SWAP (1Gb)'
+    cyn_msg '7.  - Optimize the Network, SSH & System Limits'
     echo 
-    yellow_msg '8.  - Optimize the Network settings.'
-    yellow_msg '9.  - Optimize the SSH settings(port 2222, disable PassAuth, enable PubKey).'
-    yellow_msg '10. - Optimize the System Limits.'
-    yellow_msg '11. - Install & Optimize NFT(open ports 2222 443 80).'
-    yellow_msg '12. - Install Crowdsec.'
-    yellow_msg '13. - Install Fail2ban.'
+    yellow_msg '8.  - Optimize the Network settings'
+    yellow_msg '9.  - Optimize the SSH settings(port 2222, disable PassAuth, enable PubKey)'
+    yellow_msg '10. - Optimize the System Limits'
+    yellow_msg '11. - Install & Optimize NFT(open ports 2222 443 80)'
+    yellow_msg '12. - Install Crowdsec'
+    yellow_msg '13. - Install Fail2ban'
     echo 
-    cyn_msg '14. - Apply Everything (XanMod + SSH & Sys Limites + SWAP + NFT + Optimize Net + Crowdsec).'
-    cyn_msg '15. - Install XanMod Kernel.'
+    cyn_msg '14. - XanMod + SSH & Sys Limites + SWAP + NFT + Optimize Net + Fail2ban'
+    cyn_msg '15. - Install XanMod Kernel'
     echo
-    red_msg 'Q - Exit.'
+    red_msg 'Q - Exit'
     echo 
 }
 
@@ -787,6 +787,8 @@ main() {
             nft_optimizations
             sleep 0.5
 
+            f2b_install
+            sleep 0.5
             echo 
             green_msg '========================='
             green_msg  'Done.'
@@ -1042,7 +1044,7 @@ apply_everything() {
     nft_optimizations
     sleep 0.5
 
-    crowdsec_install
+    f2b_install
     sleep 0.5
 }
 
