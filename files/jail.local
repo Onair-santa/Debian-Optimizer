@@ -1,5 +1,4 @@
 [DEFAULT]
-action = %(action_)s
 bantime.increment = true
 bantime.rndtime = 10m
 bantime.factor = 1
@@ -12,7 +11,6 @@ findtime  = 10m
 maxretry = 3
 banaction = nftables[type=multiport]
 banaction_allports = nftables[type=allports]
-action_ = %(banaction)s[port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
 [sshd]
 enabled = true
 port    = 2222
