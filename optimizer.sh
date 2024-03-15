@@ -726,6 +726,7 @@ f2b_install() {
     wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/files/jail.local" -q -O $F2B_PATH
     sudo systemctl enable fail2ban
     fail2ban-client reload
+    sleep 1
     fail2ban-client status
     echo 
     green_msg 'Fail2ban installed and work fine'
