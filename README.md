@@ -37,10 +37,9 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 - Append `8.8.8.8` and `8.8.4.4` to `/etc/resolv.conf`. 
   *Original `dns` file is backed up at `/etc/resolv.conf.bak`.*
 
-### 💠 Update, Upgrade, and Clean the server:
+### 💠 Update and Clean the server:
 
 - _Update_
-- _Upgrade_
 - _AutoRemove_
 - _AutoClean_
 - _Clean_
