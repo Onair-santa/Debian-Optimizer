@@ -41,7 +41,6 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 - _Update_
 - _AutoRemove_
 - _AutoClean_
-- _Clean_
 
 ### 💠 Install Useful Packages:
 
