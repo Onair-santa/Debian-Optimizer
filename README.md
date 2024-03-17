@@ -1,6 +1,7 @@
 # 📥 Debian Optimizer
 
 ## <a href="#"><img src="https://github.com/vpnhood/VpnHood/wiki/images/logo-linux.png" width="32" height="32"></a> Bash script automates the optimization of Debian(Ubuntu) server.
+![Xshell_BhQiTLAtm8](https://github.com/Onair-santa/Debian-Optimizer/assets/42511409/eb5c2936-7db5-4e3c-a807-92af04188f5e)
 
 ![Xshell_y2vBlAwG56](https://github.com/Onair-santa/Debian-Optimizer/assets/42511409/c2672397-6de5-4878-ba54-9f3a2d0f0bc1)
 
