@@ -9,7 +9,7 @@ ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 cat ~/.ssh/id_rsa
 ```
-copy private key 
+#### copy private key 
 #### SSH password authorization will be disabled and the port will change to 2222, if you have chosen SSH, NFT optimization or Everything
 
 #### Ensure that the `sudo` and `wget` packages are installed on your system:
