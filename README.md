@@ -4,7 +4,12 @@
 ![Xshell_BhQiTLAtm8](https://github.com/Onair-santa/Debian-Optimizer/assets/42511409/eb5c2936-7db5-4e3c-a807-92af04188f5e)
 
 #### Before running the script, create a key pair and place the public key in the file /.ssh/authorized_keys .
-
+```
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/id_rsa
+```
+copy private key 
 #### SSH password authorization will be disabled and the port will change to 2222, if you have chosen SSH, NFT optimization or Everything
 
 #### Ensure that the `sudo` and `wget` packages are installed on your system:
