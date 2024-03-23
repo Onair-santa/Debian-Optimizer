@@ -122,5 +122,5 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 
 This script is provided as-is, without any warranty or guarantee. Use it at your own risk.
 
-### 💠 Credits
+### 💠 Thanks
 - [hawshemi](https://github.com/hawshemi/Linux-Optimizer)
