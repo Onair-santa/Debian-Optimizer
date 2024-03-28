@@ -737,8 +737,20 @@ f2b_install() {
 
 # Show the Menu
 show_menu() {
+    link=$(echo "http://ip-api.com/json/$public_ip")
+    data=$(curl $link -s) # -s for slient output
+    status=$(echo $data | jq '.status' -r)
+    echo
+    if [[ $status == "success" ]]; then
+	city=$(echo $data | jq '.city' -r)
+	country=$( echo $data | jq '.country' -r)
+	clear
+    fi 
     echo 
-    yellow_msg 'Choose One Option: '
+    cyn_msg $city
+    cyn_msg $country
+    echo 
+    yellow_msg '              Choose One Option: '
     echo 
     green_msg '1.  - Complete Update + Packages + SWAP + Optimize Net, SSH & Sys Limits + NFT + Fail2ban'
     green_msg '2.  - Complete Update + SWAP + Optimize Net, SSH & Sys Limits + NFT'
