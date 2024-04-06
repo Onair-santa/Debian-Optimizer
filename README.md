@@ -1,6 +1,6 @@
 # 📥 Debian Optimizer
 
-## <a href="#"><img src="https://github.com/vpnhood/VpnHood/wiki/images/logo-linux.png" width="32" height="32"></a> Bash script automates the optimization of Debian(Ubuntu) server.
+## <a href="#"><img src="https://github.com/vpnhood/VpnHood/wiki/images/logo-linux.png" width="32" height="32"></a> Bash script automatically configures and optimizes the  Debian(Ubuntu) server.
 ![Xshell_iHn5oi9XqC](https://github.com/Onair-santa/Debian-Optimizer/assets/42511409/2ab79d42-f322-40e4-b37d-c3b5715e3b74)
 
 #### Before running the script, create a key pair and place the public key in the file /.ssh/authorized_keys .
@@ -18,15 +18,15 @@ cat ~/.ssh/id_rsa
 apt install -y sudo wget
 ```
 
-## 🟢 Run
+#### 🟢 Run
 
-### 💠 Root Access is Required. If the user is not root, first run:
+#### 💠 Root Access is Required. If the user is not root, first run:
 
 ```
 sudo -i
 ```
 
-### 💠 Then:
+#### 💠 Then:
 
 ```
 wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimizer.sh" -O optimizer.sh && chmod +x optimizer.sh && bash optimizer.sh
@@ -34,39 +34,39 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 
 ### It performs the following tasks:
 
-### 💠 Fix `hosts` file and DNS _(temporarily)_ :
+#### 💠 Fix `hosts` file and DNS _(temporarily)_ :
 
 - Check and append 127.0.1.1 and server hostname to `/etc/hosts`. 
   *Original `hosts` file is backed up at `/etc/hosts.bak`.*
 - Append `8.8.8.8` and `8.8.4.4` to `/etc/resolv.conf`. 
   *Original `dns` file is backed up at `/etc/resolv.conf.bak`.*
 
-### 💠 Update and Clean the server:
+#### 💠 Update and Clean the server:
 
 - _Update_
 - _AutoRemove_
 - _AutoClean_
 
-### 💠 Install Useful Packages:
+#### 💠 Install Useful Packages:
 
  _`curl`_  _`htop`_  _`jq`_  _`nftables`_  _`wget`_ _`speedtest-cli`_ 
 
-### 💠 Install XanMod LTS Kernel :
+#### 💠 Install XanMod LTS Kernel(optional) :
 
 - Enable BBRv3.
 - CloudFlare TCP Optimizations.
 - More Details: https://xanmod.org
 
-### 💠 Set the server TimeZone to VPS IP address location.
+#### 💠 Set the server TimeZone to VPS IP address location.
 
-### 💠 Create & Enable `SWAP` File:
+#### 💠 Create & Enable `SWAP` File:
 
 - Swap Path: `"/swapfile"`
 - Swap Size: `1Gb`
 
-### 💠 Disable `IPv6` Support.
+#### 💠 Disable `IPv6` Support.
 
-### 💠 Optimize the `SYSCTL` Configs.
+#### 💠 Optimize the `SYSCTL` Configs.
 
 - Optimize `SWAP`.
 
@@ -78,7 +78,7 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
   
     *Original file is backed up at `/etc/sysctl.conf.bak`.*
 
-### 💠 Optimize `SSH`:
+#### 💠 Optimize `SSH`:
 
 - Port 2222 (change 22 → 2222)
 - Remove PasswordAuthentication
@@ -92,21 +92,21 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 - Enable X11 Forwarding.
     *Original file is backed up at `/etc/ssh/sshd_config.bak`.*
 
-### 💠 Optimize the System Limits:
+#### 💠 Optimize the System Limits:
 
 - Soft and Hard ulimit `-c -d -f -i -l -n -q -s -u -v -x` optimizations.
 
-### 💠 Install & Optimize NFTables
+#### 💠 Install & Optimize NFTables
 
 - Open port 2222 for SSH
 - Open ports TCP 80 443
 
-### 💠 Install Crowdsec security (the best analog fail2ban)
+#### 💠 Install Crowdsec security (the best analog fail2ban)
 
 - More Details: https://github.com/crowdsecurity/crowdsec
 - Linux, SSH, Firewall bouncers
 
-### 💠 Install Fail2ban security
+#### 💠 Install Fail2ban security
 
 - More Details: https://github.com/fail2ban/fail2ban
 - Jail enabled: sshd(port=2222), recidive(allport (settings in file jail.local)
@@ -118,9 +118,9 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
   fail2ban-client status recidive
   ```
 
-### Disclaimer
+#### Disclaimer
 
 This script is provided as-is, without any warranty or guarantee. Use it at your own risk.
 
-### 💠 Thanks
+#### 💠 Thanks
 - [hawshemi](https://github.com/hawshemi/Linux-Optimizer)
