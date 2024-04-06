@@ -101,7 +101,7 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 - Open port 2222 for SSH
 - Open ports TCP 80 443
 
-#### 💠 Install Crowdsec security (the best analog fail2ban)
+#### 💠 Install Crowdsec security (optional, analog fail2ban)
 
 - More Details: https://github.com/crowdsecurity/crowdsec
 - Linux, SSH, Firewall bouncers
