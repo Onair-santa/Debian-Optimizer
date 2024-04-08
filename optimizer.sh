@@ -538,26 +538,13 @@ update_sshd_conf() {
     echo 
     sleep 0.5
 
-    # Enable TCP keep-alive messages
     echo "TCPKeepAlive yes" | tee -a $SSH_PATH
-
-    # Configure client keep-alive messages
     echo "ClientAliveInterval 3000" | tee -a $SSH_PATH
     echo "ClientAliveCountMax 100" | tee -a $SSH_PATH
-
-    # Allow agent forwarding
     echo "AllowAgentForwarding yes" | tee -a $SSH_PATH
-
-    # Allow TCP forwarding
     echo "AllowTcpForwarding yes" | tee -a $SSH_PATH
-
-    # Enable gateway ports
     echo "GatewayPorts yes" | tee -a $SSH_PATH
-
-    # Enable tunneling
     echo "PermitTunnel yes" | tee -a $SSH_PATH
-
-    # Enable X11 graphical interface forwarding
     echo "X11Forwarding yes" | tee -a $SSH_PATH
     
     # My
