@@ -685,11 +685,62 @@ crowdsec_install() {
     echo 
     sleep 0.5
     
-    CS_PATH="/etc/crowdsec/config.yaml"
     curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | sudo bash && sudo apt install crowdsec
     sleep 0.5
     sudo apt install crowdsec-firewall-bouncer-nftables
-    wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/files/config.yaml" -q -O $CS_PATH
+    cat >/etc/crowdsec/config.yaml <<-\EOF
+common:
+  daemonize: true
+  log_media: file
+  log_level: info
+  log_dir: /var/log/
+  log_max_size: 20
+  compress_logs: true
+  log_max_files: 10
+  working_dir: .
+config_paths:
+  config_dir: /etc/crowdsec/
+  data_dir: /var/lib/crowdsec/data/
+  simulation_path: /etc/crowdsec/simulation.yaml
+  hub_dir: /etc/crowdsec/hub/
+  index_path: /etc/crowdsec/hub/.index.json
+  notification_dir: /etc/crowdsec/notifications/
+  plugin_dir: /usr/lib/crowdsec/plugins/
+crowdsec_service:
+  acquisition_path: /etc/crowdsec/acquis.yaml
+  acquisition_dir: /etc/crowdsec/acquis.d
+  parser_routines: 1
+cscli:
+  output: human
+  color: auto
+db_config:
+  log_level: info
+  type: sqlite
+  db_path: /var/lib/crowdsec/data/crowdsec.db
+  flush:
+    max_items: 5000
+    max_age: 7d
+plugin_config:
+  user: nobody # plugin process would be ran on behalf of this user
+  group: nogroup # plugin process would be ran on behalf of this group
+api:
+  client:
+    insecure_skip_verify: false
+    credentials_path: /etc/crowdsec/local_api_credentials.yaml
+  server:
+    log_level: info
+    listen_uri: 127.0.0.1:8080
+    profiles_path: /etc/crowdsec/profiles.yaml
+    console_path: /etc/crowdsec/console.yaml
+    trusted_ips: # IP ranges, or IPs which can have admin API access
+      - 127.0.0.1
+      - ::1
+prometheus:
+  enabled: true
+  level: full
+  listen_addr: 127.0.0.1
+  listen_port: 6060
+EOF
     cscli collections install crowdsecurity/iptables
     # Reload
     sudo systemctl reload crowdsec
