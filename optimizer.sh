@@ -671,9 +671,9 @@ nft_optimizations() {
     # Open default ports.
     sudo nft add rule inet filter input iifname lo accept
     sudo nft add rule inet filter input ct state established,related accept
-    sudo nft add rule inet filter input iifname $INTERFACE tcp dport "$SSH_PORT" accept
-    sudo nft add rule inet filter input iifname $INTERFACE tcp dport 80 accept
-    sudo nft add rule inet filter input iifname $INTERFACE tcp dport 443 accept
+    sudo nft add rule inet filter input iifname "$INTERFACE" tcp dport "$SSH_PORT" accept
+    sudo nft add rule inet filter input iifname "$INTERFACE" tcp dport 80 accept
+    sudo nft add rule inet filter input iifname "$INTERFACE" tcp dport 443 accept
     sudo nft add chain inet filter input '{ policy drop; }'
     sleep 0.5
     echo '#!/usr/sbin/nft -f' > /etc/nftables.conf
