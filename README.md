@@ -51,11 +51,11 @@ wget "https://raw.githubusercontent.com/Onair-santa/Debian-Optimizer/main/optimi
 
  _`curl`_  _`htop`_  _`jq`_  _`nftables`_  _`wget`_ _`speedtest-cli`_ 
 
-#### 💠 Install XanMod LTS Kernel(optional) :
+#### 💠 Install Synth-Shell :
 
-- Enable BBRv3.
-- CloudFlare TCP Optimizations.
-- More Details: https://xanmod.org
+- More detailes https://github.com/andresgongora/synth-shell
+![chrome_NvQkCDWzLS](https://github.com/user-attachments/assets/280fbfbe-866c-437e-a714-2e383259f29b)
+
 
 #### 💠 Set the server TimeZone to VPS IP address location.
 
