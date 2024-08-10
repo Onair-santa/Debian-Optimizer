@@ -313,78 +313,6 @@ complete_update() {
     sleep 0.5
 }
 
-
-# Install XanMod Kernel
-install_xanmod() {
-    echo 
-    yellow_msg 'Checking XanMod...'
-    echo 
-    sleep 0.5
-    
-    if uname -r | grep -q 'xanmod'; then
-        green_msg 'XanMod is already installed.'
-        echo 
-        sleep 0.5
-    else
-        echo 
-        yellow_msg 'XanMod not found. Installing XanMod Kernel...'
-        echo 
-        sleep 0.5
-
-        # Update and Upgrade
-        sudo apt update -q
-        sudo apt upgrade -y
-        sudo apt install wget curl gpg -y
-
-        # Add the XanMod repository key
-        wget -qO - https://gitlab.com/afrd.gpg | sudo gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg
-        # Add the XanMod repository
-        echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-release.list
-
-        # Check the CPU level
-        cpu_level=$(awk -f - <<EOF
-        BEGIN {
-            while (!/flags/) if (getline < "/proc/cpuinfo" != 1) exit 1
-            if (/lm/&&/cmov/&&/cx8/&&/fpu/&&/fxsr/&&/mmx/&&/syscall/&&/sse2/) level = 1
-            if (level == 1 && /cx16/&&/lahf/&&/popcnt/&&/sse4_1/&&/sse4_2/&&/ssse3/) level = 2
-            if (level == 2 && /avx/&&/avx2/&&/bmi1/&&/bmi2/&&/f16c/&&/fma/&&/abm/&&/movbe/&&/xsave/) level = 3
-            if (level == 3 && /avx512f/&&/avx512bw/&&/avx512cd/&&/avx512dq/&&/avx512vl/) level = 4
-            if (level > 0) { print level; exit level + 1 }
-            exit 1
-        }
-EOF
-        )
-
-        # Install the appropriate XanMod kernel based on CPU level
-        case $cpu_level in
-            1)
-                sudo apt update -qq && sudo apt install linux-xanmod-lts-x64v1 -y
-                ;;
-            2)
-                sudo apt update -qq && sudo apt install linux-xanmod-lts-x64v2 -y
-                ;;
-            3)
-                sudo apt update -qq && sudo apt install linux-xanmod-lts-x64v3 -y
-                ;;
-            4)
-                sudo apt update -qq && sudo apt install linux-xanmod-lts-x64v4 -y
-                ;;
-            *)
-                echo "Unsupported CPU level."
-                exit 1
-                ;;
-        esac
-    
-        # Clean up
-        sudo apt update -qq
-        sudo apt autoremove -y
-        echo 
-        green_msg "XanMod Kernel Installed."
-        echo 
-        sleep 0.5
-    fi
-}
-
 ## Install useful packages
 installations() {
     echo 
@@ -797,6 +725,19 @@ EOF
     sleep 1
 }
 
+# Synth Shell
+synth_shell() {
+sudo apt install bc fonts-powerline git -y
+git clone --recursive https://github.com/andresgongora/synth-shell.git
+chmod +x synth-shell/setup.sh
+~/synth-shell/setup.sh
+sleep 1 
+sudo rm ~/.config/synth-shell/synth-shell-greeter.config.default
+sudo rm ~/.config/synth-shell/synth-shell-greeter.config
+wget https://raw.githubusercontent.com/Onair-santa/files/main/synth-shell-greeter.config -q -O ~/.config/synth-shell/synth-shell-greeter.config
+wget https://raw.githubusercontent.com/Onair-santa/files/main/synth-shell-greeter.sh -q -O ~/.config/synth-shell/synth-shell-greeter.sh
+sleep 1
+}
 
 # Show the Menu
 show_menu() {
@@ -815,7 +756,7 @@ show_menu() {
     echo 
     yellow_msg '              Choose One Option: '
     echo 
-    green_msg '1.  - Complete Update + Packages + SWAP + Optimize Net, SSH & Sys Limits + NFT + Fail2ban'
+    green_msg '1.  - Complete Update + Packages + SWAP + Optimize Net, SSH & Sys Limits + NFT + Fail2ban + SynthShell'
     green_msg '2.  - Complete Update + SWAP + Optimize Net, SSH & Sys Limits + NFT'
     green_msg '3.  - Complete Update + SWAP + Optimize Net, SSH & Sys Limits'
     echo 
@@ -830,9 +771,7 @@ show_menu() {
     yellow_msg '11. - Install & Optimize NFT(open ports 2222 443 80)'
     yellow_msg '12. - Install Crowdsec'
     yellow_msg '13. - Install Fail2ban'
-    echo 
-    cyn_msg '14. - XanMod + SSH & Sys Limites + SWAP + NFT + Optimize Net + Fail2ban'
-    cyn_msg '15. - Install XanMod Kernel'
+    yellow_msg '14. - Install SynthShell'
     echo
     red_msg 'Q - Exit'
     echo 
@@ -875,7 +814,10 @@ main() {
 
             f2b_install
             sleep 0.5
-            echo 
+
+	    synth_shell
+	    sleep 1
+            echo
             green_msg '========================='
             green_msg  'Done.'
             green_msg '========================='
@@ -1061,8 +1003,8 @@ main() {
             green_msg '========================='
             ;;
         14)
-            apply_everything
-
+	    synth_shell
+            sleep 1
             echo 
             green_msg '========================='
             green_msg  'Done.'
@@ -1071,20 +1013,6 @@ main() {
             ask_reboot
             ;;
 
-        15)
-            complete_update
-            sleep 0.5
-
-            install_xanmod
-            sleep 0.5
-
-            echo 
-            green_msg '========================='
-            green_msg  'Done.'
-            green_msg '========================='
-
-            ask_reboot
-            ;;
         q)
             exit 0
             ;;
@@ -1095,44 +1023,5 @@ main() {
         esac
     done
 }
-
-
-# Apply Everything
-apply_everything() {
-
-    complete_update
-    sleep 0.5
-
-    install_xanmod
-    sleep 0.5 
-
-    installations
-    enable_packages
-    sleep 0.5
-
-    swap_maker
-    sleep 0.5
-
-    sysctl_optimizations
-    sleep 0.5
-
-    remove_old_ssh_conf
-    sleep 0.5
-
-    update_sshd_conf
-    sleep 0.5
-
-    limits_optimizations
-    sleep 0.5
-    
-    find_ssh_port
-    ext_interface
-    nft_optimizations
-    sleep 0.5
-
-    f2b_install
-    sleep 0.5
-}
-
 
 main
