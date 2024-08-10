@@ -1,7 +1,7 @@
 # 📥 Debian Optimizer
 
 ## <a href="#"><img src="https://github.com/vpnhood/VpnHood/wiki/images/logo-linux.png" width="32" height="32"></a> Bash script automatically configures and optimizes the  Debian(Ubuntu) server.
-![Xshell_iHn5oi9XqC](https://github.com/Onair-santa/Debian-Optimizer/assets/42511409/2ab79d42-f322-40e4-b37d-c3b5715e3b74)
+![chrome_jLHCdtS4n7](https://github.com/user-attachments/assets/3c7a302a-a57b-45ae-95fc-920469d085f5)
 
 #### Before running the script, create a key pair and place the public key in the file /.ssh/authorized_keys .
 ```
