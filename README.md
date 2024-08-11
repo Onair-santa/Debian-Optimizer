@@ -124,3 +124,6 @@ This script is provided as-is, without any warranty or guarantee. Use it at your
 
 #### 💠 Thanks
 - [hawshemi](https://github.com/hawshemi/Linux-Optimizer)
+- [andresgongora](https://github.com/andresgongora/synth-shell)
+- [Fail2ban](https://github.com/fail2ban/fail2ban)
+- [Crowdsec](https://github.com/crowdsecurity/crowdsec)
